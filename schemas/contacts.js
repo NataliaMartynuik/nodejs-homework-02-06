@@ -10,7 +10,8 @@ const updateContactSchema = Joi.object({
   name: Joi.string().min(3).max(30),
   email: Joi.string().email(),
   phone: Joi.string().pattern(/^[(][\d]{3}[)]\s[\d]{3}[-][\d]{4}/),
-});
+})
+  .min(1);
 
 module.exports = {
   createContactSchema,
