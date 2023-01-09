@@ -10,6 +10,6 @@ router.get('/', tryCatchWrapper(getContacts));
 router.get('/:contactId', tryCatchWrapper(getContact));
 router.post('/', validateBody(createContactSchema), tryCatchWrapper(createContact));
 router.delete('/:contactId', tryCatchWrapper(deleteContact));
-router.put('/:contactId', validateBody(updateContactSchema), tryCatchWrapper(putContact));
+router.put('/:contactId', tryCatchWrapper(putContact));
 
 module.exports = router
