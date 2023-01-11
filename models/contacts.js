@@ -41,7 +41,7 @@ const addContact = async (name, email, phone) => {
   return contact;
 }
 
-const updateContact = async (contactId, name, email, phone ) => {
+const updateContact = async (contactId, name, email, phone) => {
   const contacts = await readContacts();
   const upContact = contacts.find((contact) => contact.id === contactId);
   upContact.name = name;
