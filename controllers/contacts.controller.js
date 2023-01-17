@@ -1,14 +1,14 @@
-const { listContacts, getContactById, removeContact, addContact, updateContact } = require('../models/contacts.js');
 const { HttpError } = require('../helpers/index.js');
+const { Contact } = require("../models/contacts");
 
 async function getContacts (req, res) {
-  const contacts = await listContacts();
+  const contacts = await Contact.find({});
   res.json(contacts);
 }
 
 async function getContact (req, res, next) {
   const { contactId } = req.params;
-  const contact = await getContactById(contactId)
+  const contact = await Contact.findById(contactId)
   if (!contact) {
     throw new HttpError(404, `Contact with id ${contactId} not found!`)
   }
@@ -16,25 +16,39 @@ async function getContact (req, res, next) {
 }
 
 async function createContact (req, res) {
-  const { name, email, phone } = req.body;
-  const newContact = await addContact(name, email, phone);
+  const { name, email, phone, favorite } = req.body;
+    const newContact = await Contact.create({
+      name,
+      email,
+      phone,
+      favorite,
+    });
   res.status(201).json(newContact);
 }
 
 async function deleteContact (req, res, next) {
   const { contactId } = req.params;
-  const contact = await getContactById(contactId);
+  const contact = await Contact.findById(contactId);
   if (!contact) {
     throw new HttpError(404, `Contact with id ${contactId} not found!`)
   }
-  await removeContact(contactId);
+  await Contact.findByIdAndRemove(contactId);
   res.status(200).json(contact);
 }
 
 async function putContact (req, res, next) {
   const { contactId } = req.params;
-  const { name, email, phone } = req.body;
-  const contact = await updateContact(contactId, name, email, phone);
+  const { name, email, phone, favorite } = req.body;
+  const contact = await Contact.findByIdAndUpdate(contactId, { name, email, phone, favorite }, {new: true});
+  if (!contact) {
+    throw new HttpError(404, `Contact with id ${contactId} not found!`)
+  }
+  res.status(200).json(contact);
+}
+
+async function updateStatusContact(req, res, next) {
+  const { contactId } = req.params;
+  const contact = await Contact.findByIdAndUpdate(contactId, req.body, {new: true});
   if (!contact) {
     throw new HttpError(404, `Contact with id ${contactId} not found!`)
   }
@@ -47,4 +61,5 @@ module.exports = {
     createContact,
     deleteContact,
     putContact,
+    updateStatusContact,
 }
