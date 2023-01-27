@@ -1,5 +1,6 @@
 const { HttpError } = require("../helpers/index");
 
+
 function validateBody(schema) {
   return (req, res, next) => {
     const { error } = schema.validate(req.body);
@@ -13,4 +14,5 @@ function validateBody(schema) {
 module.exports = {
   validateBody,
 }
+
 
