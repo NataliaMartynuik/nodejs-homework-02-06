@@ -15,3 +15,4 @@ contactsRouter.put('/:contactId', auth, validateBody(updateContactSchema), tryCa
 contactsRouter.patch('/:contactId/favorite', auth, validateBody(updateStatusContactSchema), tryCatchWrapper(updateStatusContact));
 
 module.exports = contactsRouter
+
