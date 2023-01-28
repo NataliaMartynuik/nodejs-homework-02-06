@@ -22,12 +22,10 @@ async function register(req, res, next) {
     });
 
     res.status(201).json({
-      data: {
-        user: {
-          email,
-          subscription,
-          id: savedUser._id,
-        },
+      user: {
+        email,
+        subscription,
+        id: savedUser._id,
       },
     });
   } catch (error) {
@@ -60,12 +58,10 @@ async function login(req, res, next) {
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
 
   return res.json({
-    data: {
-      token,
-      user: {
+    token,
+    user: {
         email,
         subscription,
-  }
     },
   });
 }

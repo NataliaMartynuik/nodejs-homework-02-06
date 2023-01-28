@@ -3,7 +3,7 @@ const { Contact } = require("../models/contacts");
 
 async function getContacts(req, res) {
   const { _id: owner } = req.user;
-  const { page = 1, limit = 20, favorite = true } = req.query;
+  const { page = 1, limit = 20, favorite = [true, false] } = req.query;
   const skip = (page - 1) * limit
   const contacts = await Contact.find({ owner, favorite: favorite }, "-createdAt -updatedAt", {
     skip,
