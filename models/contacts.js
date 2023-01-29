@@ -5,20 +5,23 @@ const schema = mongoose.Schema(
     name: {
       type: String,
       required: [true, 'Set name for contact'],
-      unique: true,
     },
     email: {
       type: String,
-      unique: true,
+
     },
     phone: {
       type: String,
       required: [true, 'Set phone for contact'],
-      unique: true,
     },
     favorite: {
       type: Boolean,
-      default:false,
+      default: false,
+    },
+    owner: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'user',
+
     },
   },
   {
