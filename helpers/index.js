@@ -1,3 +1,8 @@
+const nodemailer = require("nodemailer");
+require('dotenv').config()
+
+const { EMAIL_PASS } = process.env;
+
 function tryCatchWrapper(enpointFn) {
   return async (req, res, next) => {
     try {
@@ -20,7 +25,29 @@ statusCode() {
   }
 }
 
+async function sendMail({ to, html, subject }) {
+  const email = {
+    from: "jannika11121@meta.ua",
+    to,
+    subject,
+    html,
+  };
+
+  const transport = nodemailer.createTransport({
+    host: "smtp.meta.ua",
+    port: 465,
+    secure: true,
+    auth: {
+      user: "jannika11121@meta.ua",
+      pass: EMAIL_PASS,
+    },
+  });
+
+  await transport.sendMail(email);
+}
+
 module.exports = {
   tryCatchWrapper,
   HttpError,
+  sendMail,
 };

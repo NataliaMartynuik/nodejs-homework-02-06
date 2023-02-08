@@ -3,8 +3,7 @@ const { tryCatchWrapper } = require('../../helpers/index');
 const { getContact, getContacts, createContact, deleteContact, putContact, updateStatusContact} = require("../../controllers/contacts.controller");
 const { validateBody } = require("../../middlewares/index");
 const { createContactSchema, updateContactSchema, updateStatusContactSchema } = require("../../schemas/contacts");
-const auth = require("../../middlewares/auth")
-
+const { auth } = require("../../middlewares/auth");
 
 const contactsRouter = express.Router()
 
