@@ -1,11 +1,14 @@
 const { User } = require("../models/user");
+
 const { HttpError, sendMail } = require("../helpers");
+
 const jwt = require("jsonwebtoken");
 const path = require("path");
 const fs = require("fs/promises");
 const jimp = require('jimp');
 const gravatar = require('gravatar');
 const { v4 } = require("uuid");
+
 
 const bcrypt = require("bcrypt");
 
@@ -33,6 +36,7 @@ async function register(req, res, next) {
       to: email,
       subject: 'Please verify your registration on our website',
       html: `<a target="_blank" href="http://localhost:3000/api/users/verify/${verificationToken}">Click this link for your verification approval </a>`,
+
     });
 
     res.status(201).json({
@@ -132,6 +136,7 @@ async function uploadAvatar(req, res) {
   return res.json({
     avatarURL: updateUser.avatarURL,
   });
+
 }
 
 async function verifyEmail(req, res, next) {
@@ -173,7 +178,6 @@ async function resendVerify(req, res) {
   })
 }
 
-
 module.exports = {
   register,
   login,
@@ -183,4 +187,5 @@ module.exports = {
   uploadAvatar,
   verifyEmail,
   resendVerify,
+
 };

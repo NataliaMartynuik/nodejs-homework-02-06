@@ -21,6 +21,7 @@ const schema = mongoose.Schema(
     avatarURL: {
       type: String,
     },
+
     token: String,
     verify: {
     type: Boolean,
@@ -30,6 +31,7 @@ const schema = mongoose.Schema(
     type: String,
     required: [true, 'Verify token is required'],
   },
+
   },
   {
     timestamps: true, 
