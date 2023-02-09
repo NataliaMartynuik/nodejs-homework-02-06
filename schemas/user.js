@@ -6,6 +6,11 @@ const createUserSchema = Joi.object({
   subscription: Joi.string().valueOf('starter', 'pro', 'business'),
 });
 
+const emailSchema = Joi.object({
+  email: Joi.string().required(),
+})
+
 module.exports = {
   createUserSchema,
+  emailSchema,
 }

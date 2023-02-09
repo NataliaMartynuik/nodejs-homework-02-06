@@ -5,7 +5,6 @@ const { validateBody } = require("../../middlewares/index");
 const { createContactSchema, updateContactSchema, updateStatusContactSchema } = require("../../schemas/contacts");
 const { auth } = require("../../middlewares/auth");
 
-
 const contactsRouter = express.Router()
 
 contactsRouter.get('/', auth, tryCatchWrapper(getContacts));

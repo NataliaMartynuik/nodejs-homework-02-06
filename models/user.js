@@ -21,7 +21,17 @@ const schema = mongoose.Schema(
     avatarURL: {
       type: String,
     },
-    token: String
+
+    token: String,
+    verify: {
+    type: Boolean,
+    default: false,
+  },
+    verificationToken: {
+    type: String,
+    required: [true, 'Verify token is required'],
+  },
+
   },
   {
     timestamps: true, 
